@@ -301,5 +301,45 @@ describe('Order alphabetically - orderAlphabetically', () => {
 });
 
 // BONUS ITERATION 
+describe('Turn duration of the movies - turnHoursToMinutes', () => {
+  it('Defines turnHoursToMinutes', () => {
+    expect(typeof turnHoursToMinutes).toBe('function');
+  });
 
+  it('Should return an array', () => {
+    expect(typeof turnHoursToMinutes(movies)).toBe('object');
+  });
+
+  it('Should return a new array, not update the original one', () => {
+    expect(turnHoursToMinutes(movies)).not.toEqual(movies);
+  });
+
+  it('The duration of the movie should be a number', () => {
+    expect(typeof turnHoursToMinutes(movies)[0].duration).toBe('number');
+  });
+
+  it('The duration of the movie should return the correct number to a short movie - 31 minutes', () => {
+    const movieTry = [{ duration: '0h 31min' }];
+
+    expect(turnHoursToMinutes(movieTry)[0].duration).toBe(31);
+  });
+
+  it('The duration of the movie should return the correct number for really long movie - 341 minutes', () => {
+    const movieTry = [{ duration: '5h 41min' }];
+
+    expect(turnHoursToMinutes(movieTry)[0].duration).toBe(341);
+  });
+
+  it('It should return the correct number when the duration is only in hours', () => {
+    const movieTry = [{ duration: '2h' }];
+
+    expect(turnHoursToMinutes(movieTry)[0].duration).toBe(120);
+  });
+
+  it('It should return the correct number when the duration is only in minutes', () => {
+    const movieTry = [{ duration: '54min' }];
+
+    expect(turnHoursToMinutes(movieTry)[0].duration).toBe(54);
+  });
+});
 
